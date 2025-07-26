@@ -1,6 +1,7 @@
 const canvas = document.getElementById("bg-canvas");
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, innerWidth / innerHeight, 0.1, 1000);
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(window.devicePixelRatio);
@@ -35,7 +36,7 @@ window.addEventListener('resize', () => {
   camera.updateProjectionMatrix();
 });
 
-// Preloader removal
+// Preloader logic
 window.addEventListener("load", () => {
   setTimeout(() => {
     document.getElementById("preloader").style.display = "none";
