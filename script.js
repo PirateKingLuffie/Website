@@ -1,7 +1,6 @@
-const canvas = document.getElementById("bg-canvas");
+const canvas = document.getElementById("webgl-canvas");
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-
+const camera = new THREE.PerspectiveCamera(75, innerWidth / innerHeight, 0.1, 1000);
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(window.devicePixelRatio);
@@ -36,10 +35,8 @@ window.addEventListener('resize', () => {
   camera.updateProjectionMatrix();
 });
 
-// Preloader logic
 window.addEventListener("load", () => {
   setTimeout(() => {
-    document.getElementById("preloader").style.display = "none";
     gsap.to(".title", { opacity: 1, duration: 1.5, ease: "power2.out", delay: 0.5 });
     gsap.to(".subtitle", { opacity: 1, y: 0, duration: 1.5, ease: "power2.out", delay: 1 });
   }, 1000);
