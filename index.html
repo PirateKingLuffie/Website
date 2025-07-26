@@ -5,15 +5,82 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Active Theory Recreation</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      height: 100%;
+    }
+
+    canvas {
+      display: block;
+    }
+
+    #preloader {
+      position: fixed;
+      inset: 0;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      color: white;
+      font-family: sans-serif;
+    }
+
+    .title, .subtitle {
+      opacity: 0;
+      transition: opacity 1s ease;
+      position: absolute;
+      z-index: 5;
+      color: white;
+      text-align: center;
+      width: 100%;
+    }
+
+    .title {
+      top: 30%;
+      font-size: 3rem;
+      font-weight: bold;
+    }
+
+    .subtitle {
+      top: 40%;
+      font-size: 1.5rem;
+    }
+  </style>
 </head>
 <body>
-  <canvas id="webgl-canvas"></canvas>
+  <div id="preloader">Loading...</div>
 
-  <!-- ✅ Load THREE and GSAP libraries first -->
+  <div class="title">Active Theory Recreation</div>
+  <div class="subtitle">Shader Background Demo</div>
+
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- ✅ Shader Scripts -->
+  <script id="vertexShader" type="x-shader/x-vertex">
+    void main() {
+      gl_Position = vec4(position, 1.0);
+    }
+  </script>
+
+  <script id="fragmentShader" type="x-shader/x-fragment">
+    uniform float u_time;
+    uniform vec2 u_resolution;
+
+    void main() {
+      vec2 uv = gl_FragCoord.xy / u_resolution.xy;
+      gl_FragColor = vec4(uv.x, uv.y, 0.5 + 0.5 * sin(u_time), 1.0);
+    }
+  </script>
+
+  <!-- ✅ External Libraries -->
   <script src="libs/three.min.js"></script>
   <script src="libs/gsap.min.js"></script>
 
-  <!-- ✅ Then load your own JS -->
+  <!-- ✅ Custom Script -->
   <script src="script.js"></script>
 </body>
 </html>
